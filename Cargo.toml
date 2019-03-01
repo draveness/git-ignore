@@ -1,6 +1,6 @@
 [package]
 name = "git-ignore-manager"
-version = "0.1.0"
+version = "0.1.1"
 authors = ["draveness <i@draveness.me>"]
 edition = "2018"
 description = "Manages gitignore files"
