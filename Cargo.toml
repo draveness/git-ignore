@@ -3,6 +3,8 @@ name = "git-ignore"
 version = "0.1.0"
 authors = ["draveness <i@draveness.me>"]
 edition = "2018"
+description = "Manages gitignore files"
+license = "LICENSE"
 
 [dependencies]
 reqwest = "0.9.10"
