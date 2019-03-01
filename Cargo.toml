@@ -4,9 +4,10 @@ version = "0.1.0"
 authors = ["draveness <i@draveness.me>"]
 edition = "2018"
 description = "Manages gitignore files"
-license = "LICENSE"
+license-file = "LICENSE"
 repository = "https://github.com/draveness/git-ignore"
 homepage = "https://github.com/draveness/git-ignore"
+readme = "README.md"
 
 [dependencies]
 reqwest = "0.9.10"
