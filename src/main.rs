@@ -26,7 +26,7 @@ fn main() {
         }
 
         let lang = matches.value_of("language").unwrap();
-        let target = format!("https://www.gitignore.io/{}.gitignore", lang);
+        let target = format!("https://www.gitignore.io/api/{}", lang);
         let mut response = reqwest::get(target.as_str()).unwrap();
 
         if response.status().is_success() {

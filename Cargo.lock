@@ -254,7 +254,7 @@ dependencies = [
 ]
 
 [[package]]
-name = "git-ignore"
+name = "git-ignore-manager"
 version = "0.1.0"
 dependencies = [
  "clap 2.32.0 (registry+https://github.com/rust-lang/crates.io-index)",
