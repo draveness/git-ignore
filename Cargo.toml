@@ -1,0 +1,7 @@
+[package]
+name = "git-ignore"
+version = "0.1.0"
+authors = ["draveness <i@draveness.me>"]
+edition = "2018"
+
+[dependencies]
