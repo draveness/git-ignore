@@ -1,5 +1,5 @@
 [package]
-name = "git-ignore"
+name = "git-ignore-manager"
 version = "0.1.0"
 authors = ["draveness <i@draveness.me>"]
 edition = "2018"
