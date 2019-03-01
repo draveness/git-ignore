@@ -9,6 +9,10 @@ repository = "https://github.com/draveness/git-ignore"
 homepage = "https://github.com/draveness/git-ignore"
 readme = "README.md"
 
+[[bin]]
+name = "git-ignore"
+path = "src/main.rs"
+
 [dependencies]
 reqwest = "0.9.10"
 colored = "1.7"
