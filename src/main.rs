@@ -12,7 +12,7 @@ fn main() {
         .author("Draveness <i@draveness.me>")
         .about("Manages gitignore files")
         .subcommand(SubCommand::with_name("init")
-                    .about("Downloads gitignore file from GitHub")
+                    .about("Initializes gitignore file with language")
                     .arg(Arg::with_name("language")
                          .required(true)
                          .index(1))
@@ -21,7 +21,7 @@ fn main() {
 
     if let Some(matches) = matches.subcommand_matches("init") {
         if Path::new(gitignore_file).exists() {
-            println!("{}: .gitignore already exists", "warning".bold().red());
+            println!("{}: .gitignore already exists", "Warning".bold().red());
             return
         }
 
@@ -35,9 +35,9 @@ fn main() {
                 File::create(fname).unwrap()
             };
             let _ = copy(&mut response, &mut dest);
-            println!("{}: .gitignore file for {} initialized", "succeed".bold().green(), lang.bold())
+            println!("{}: .gitignore file for {} initialized", "Success".bold().green(), lang.bold())
         } else {
-            println!("{}: {}.gitignore not found on GitHub", "warning".bold().red(), lang.bold());
+            println!("{}: {}.gitignore not found on gitignore.io", "Warning".bold().red(), lang.bold());
         }
     }
 }
