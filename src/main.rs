@@ -35,7 +35,7 @@ fn main() {
                 File::create(fname).unwrap()
             };
             let _ = copy(&mut response, &mut dest);
-            println!("{}: .gitignore file for {} initialized", "Success".bold().green(), lang.bold())
+            println!(".gitignore file for {} initialized", lang.bold())
         } else {
             println!("{}: {}.gitignore not found on gitignore.io", "Warning".bold().red(), lang.bold());
         }
