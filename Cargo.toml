@@ -5,6 +5,8 @@ authors = ["draveness <i@draveness.me>"]
 edition = "2018"
 description = "Manages gitignore files"
 license = "LICENSE"
+repository = "https://github.com/draveness/git-ignore"
+homepage = "https://github.com/draveness/git-ignore"
 
 [dependencies]
 reqwest = "0.9.10"
