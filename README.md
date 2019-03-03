@@ -13,4 +13,7 @@ cargo install git-ignore-manager
 ```
 $ git-ignore init go
 .gitignore file for go initialized
+
+$ git-ignore + .DS_Store
+==> .DS_Store added to .gitignore file
 ```
