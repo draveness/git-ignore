@@ -1,5 +1,7 @@
 use std::fs::File;
+use std::fs::OpenOptions;
 use std::io::copy;
+use std::io::prelude::*;
 use std::path::Path;
 use clap::{Arg, App, SubCommand};
 use colored::*;
@@ -16,7 +18,13 @@ fn main() {
                     .arg(Arg::with_name("language")
                          .required(true)
                          .index(1))
-                    .help("Programming language specified gitignore file"))
+                    .help("programming language specified gitignore file"))
+        .subcommand(SubCommand::with_name("+")
+                    .about("Add rules to gitignore file")
+                    .arg(Arg::with_name("node")
+                         .required(true)
+                         .index(1))
+                    .help("file or folder need to be ignored"))
         .get_matches();
 
     if let Some(matches) = matches.subcommand_matches("init") {
@@ -31,13 +39,33 @@ fn main() {
 
         if response.status().is_success() {
             let mut dest = {
-                let fname = ".gitignore";
-                File::create(fname).unwrap()
+                File::create(gitignore_file).unwrap()
             };
             let _ = copy(&mut response, &mut dest);
-            println!(".gitignore file for {} initialized", lang.bold())
+            println!("==> .gitignore file for {} initialized", lang.bold())
         } else {
             println!("{}: {}.gitignore not found on gitignore.io", "Warning".bold().red(), lang.bold());
+        }
+    }
+
+    if let Some(matches) = matches.subcommand_matches("+") {
+        if !Path::new(gitignore_file).exists() {
+            println!("{}: .gitignore not exists, use `git-ignore init` to initialize ignore file.", "Warning".bold().red());
+            return
+        }
+
+        let file_or_folder = matches.value_of("node").unwrap();
+
+        let mut file = OpenOptions::new()
+            .write(true)
+            .append(true)
+            .open(gitignore_file)
+            .unwrap();
+
+        if let Err(e) = file.write_fmt(format_args!("{}\n", file_or_folder)) {
+            println!("{}: write {} to .gitignore failed, err: {}.", "Warning".bold().red(), file_or_folder, e);
+        } else {
+            println!("==> {} added to .gitignore file", file_or_folder.bold())
         }
     }
 }
