@@ -2,7 +2,7 @@
 name = "git-ignore-manager"
 version = "0.2.0"
 authors = ["draveness <i@draveness.me>"]
-edition = "2019"
+edition = "2018"
 description = "Manages gitignore files"
 license-file = "LICENSE"
 repository = "https://github.com/draveness/git-ignore"
