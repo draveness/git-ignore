@@ -18,6 +18,9 @@ fn main() {
                     .arg(Arg::with_name("language")
                          .required(true)
                          .index(1))
+                    .arg(Arg::with_name("overwrite")
+                         .short("o")
+                         .help("overwrite .gitignore file"))
                     .help("programming language specified gitignore file"))
         .subcommand(SubCommand::with_name("+")
                     .about("Add rules to gitignore file")
@@ -28,7 +31,8 @@ fn main() {
         .get_matches();
 
     if let Some(matches) = matches.subcommand_matches("init") {
-        if Path::new(gitignore_file).exists() {
+        let is_overwrite = matches.is_present("overwrite");
+        if Path::new(gitignore_file).exists() && !is_overwrite {
             println!("{}: .gitignore already exists", "Warning".bold().red());
             return
         }
@@ -38,11 +42,19 @@ fn main() {
         let mut response = reqwest::get(target.as_str()).unwrap();
 
         if response.status().is_success() {
-            let mut dest = {
-                File::create(gitignore_file).unwrap()
-            };
-            let _ = copy(&mut response, &mut dest);
-            println!("==> .gitignore file for {} initialized", lang.bold())
+            if is_overwrite {
+                let mut file = OpenOptions::new()
+                    .write(true)
+                    .open(gitignore_file)
+                    .unwrap();
+
+                let _ = copy(&mut response, &mut file);
+                println!("==> overwrite .gitignore file for {}", lang.bold())
+            } else {
+                let mut file = File::create(gitignore_file).unwrap();
+                let _ = copy(&mut response, &mut file);
+                println!("==> .gitignore file for {} initialized", lang.bold())
+            }
         } else {
             println!("{}: {}.gitignore not found on gitignore.io", "Warning".bold().red(), lang.bold());
         }
