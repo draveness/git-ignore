@@ -19,7 +19,7 @@ fn main() {
                          .required(true)
                          .index(1))
                     .arg(Arg::with_name("overwrite")
-                         .short("o")
+                         .long("overwrite")
                          .help("overwrite .gitignore file"))
                     .help("programming language specified gitignore file"))
         .subcommand(SubCommand::with_name("+")
